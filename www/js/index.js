@@ -49,8 +49,14 @@ var app = {
 };
 
 function refresh() {
-    //var s = document.getElementById('liveMap');
-    //s.location.reload();
     window.top.location = window.top.location;
     return false;
+};
+
+function loadPlanner()
+{
+    var url = window.location.href;
+    url = url.replace("index", "planner");
+    window.location.href = url;
+    return true;
 };
