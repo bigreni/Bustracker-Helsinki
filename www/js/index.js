@@ -55,8 +55,12 @@ function refresh() {
 
 function loadPlanner()
 {
-    var url = window.location.href;
-    url = url.replace("index", "planner");
-    window.location.href = url;
+    window.location.href = "planner.html";
     return true;
 };
+
+function loadMap()
+{
+    window.location.href = "index.html";
+    return true;
+}
