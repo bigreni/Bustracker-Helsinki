@@ -55,7 +55,7 @@ function refresh() {
 
 function loadPlanner()
 {
-    window.location.href = "planner.html";
+    window.location.href = "Planner.html";
     return true;
 };
 
