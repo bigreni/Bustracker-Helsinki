@@ -34,7 +34,7 @@
         </style>
 
 </head>
-<body onload="onLoad();">
+<body>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/admob.js"></script>
@@ -44,6 +44,7 @@
             // Show the splash screen with a loading message
             // Handler to hide the message when the loading stops
             window.onload = function() {
+                onLoad();
                 document.getElementById("splashscreen").style.display = 'none';
             };
             document.getElementById("splashscreen").innerHTML = 'Loading...';
