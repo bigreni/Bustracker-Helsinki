@@ -1,14 +1,16 @@
     function onLoad() {
         if ((/(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent))) {
-            document.addEventListener('deviceready', initApp, false);
+            document.addEventListener('deviceready', checkFirstUse, false);
         } else {
-            initApp();
+            checkFirstUse();
         }
     }
+
     var admobid = {};
     if (/(android)/i.test(navigator.userAgent)) {
         admobid = { // for Android
-            banner: 'ca-app-pub-1683858134373419/4648497083'
+            banner: 'ca-app-pub-1683858134373419/4648497083',
+            interstitial: 'ca-app-pub-1683858134373419/3279071486'
             //banner: 'ca-app-pub-3886850395157773/3411786244'
             //interstitial: 'ca-app-pub-9249695405712287/3301233156'
         };
@@ -18,8 +20,12 @@
         if (!AdMob) { alert('admob plugin not ready'); return; }
         initAd();
         // display the banner at startup
-        createSelectedBanner();
+        if (Math.round(Math.random()) == 1)
+        { loadInterstitial(); }
+        else
+        { createSelectedBanner(); }
     }
+
     function initAd() {
         var defaultOptions = {
             // bannerId: admobid.banner,
@@ -58,11 +64,12 @@
 
         // new events, with variable to differentiate: adNetwork, adType, adEvent
         document.addEventListener('onAdFailLoad', function (data) {
-            alert('error: ' + data.error +
-                    ', reason: ' + data.reason +
-                    ', adNetwork:' + data.adNetwork +
-                    ', adType:' + data.adType +
-                    ', adEvent:' + data.adEvent); // adType: 'banner' or 'interstitial'
+            createSelectedBanner();
+            //alert('error: ' + data.error +
+            //        ', reason: ' + data.reason +
+            //        ', adNetwork:' + data.adNetwork +
+            //        ', adType:' + data.adType +
+            //        ', adEvent:' + data.adEvent); // adType: 'banner' or 'interstitial'
         });
         document.addEventListener('onAdLoaded', function (data) { });
         document.addEventListener('onAdPresent', function (data) { });
@@ -115,4 +122,47 @@ function successFunction()
  
 function errorFunction(error)
 {
+}
+
+    function loadInterstitial() {
+        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: true, autoShow: true });
+    }
+
+
+   function checkFirstUse()
+    {
+        var currentVersion = 6;
+        var p = window.localStorage.getItem("currentVersion");
+        if (p == null) //App downloaded first time
+        {
+//Finnish
+            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for downloading', 'OK');
+            window.localStorage.setItem("currentVersion", currentVersion);
+        }
+        else if(p < currentVersion) //if app upgraded
+        {
+//Finnish
+            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for updating', 'OK');
+            window.localStorage.setItem("currentVersion", currentVersion);            
+        }
+        else
+        {
+            askRating();
+            initApp();
+        }
+    }
+
+function askRating()
+{
+  AppRate.preferences = {
+  openStoreInApp: true,
+  useLanguage:  'fi',
+  usesUntilPrompt: 10,
+  promptAgainForEachNewVersion: false,
+  storeAppURL: {
+                android: 'market://details?id=com.helsinki.withads'
+               }
+};
+ 
+AppRate.promptForRating(false);
 }
