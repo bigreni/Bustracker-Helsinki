@@ -19,11 +19,12 @@
     function initApp() {
         if (!AdMob) { alert('admob plugin not ready'); return; }
         initAd();
+        loadInterstitial();
         // display the banner at startup
-        if (Math.round(Math.random()) == 1)
-        { loadInterstitial(); }
-        else
-        { createSelectedBanner(); }
+        //if (Math.round(Math.random()) == 1)
+        //{ loadInterstitial(); }
+        //else
+        //{ createSelectedBanner(); }
     }
 
     function initAd() {
@@ -64,7 +65,7 @@
 
         // new events, with variable to differentiate: adNetwork, adType, adEvent
         document.addEventListener('onAdFailLoad', function (data) {
-            createSelectedBanner();
+            //createSelectedBanner();
             //alert('error: ' + data.error +
             //        ', reason: ' + data.reason +
             //        ', adNetwork:' + data.adNetwork +
@@ -131,25 +132,25 @@ function errorFunction(error)
 
    function checkFirstUse()
     {
-        var currentVersion = 6;
-        var p = window.localStorage.getItem("currentVersion");
-        if (p == null) //App downloaded first time
-        {
-//Finnish
-            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for downloading', 'OK');
-            window.localStorage.setItem("currentVersion", currentVersion);
-        }
-        else if(p < currentVersion) //if app upgraded
-        {
-//Finnish
-            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for updating', 'OK');
-            window.localStorage.setItem("currentVersion", currentVersion);            
-        }
-        else
-        {
+//        var currentVersion = 6;
+//        var p = window.localStorage.getItem("currentVersion");
+//        if (p == null) //App downloaded first time
+//        {
+////Finnish
+//            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for downloading', 'OK');
+//            window.localStorage.setItem("currentVersion", currentVersion);
+//        }
+//        else if(p < currentVersion) //if app upgraded
+//        {
+////Finnish
+//            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for updating', 'OK');
+//            window.localStorage.setItem("currentVersion", currentVersion);            
+//        }
+//        else
+//        {
             askRating();
             initApp();
-        }
+//        }
     }
 
 function askRating()
