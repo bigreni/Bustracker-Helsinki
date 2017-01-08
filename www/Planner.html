@@ -19,9 +19,15 @@
 	<div id="fullpage" data-role="page">
             <br>
             <iframe style="width: 100vw; height:85vh; border: none" src="http://beta.digitransit.fi/" height="240" width="320"></iframe>
-            <a href="javascript:loadMap();" class="ui-btn ui-btn-b">Live Map</a>
+            <!--<a href="javascript:loadMap();" class="ui-btn ui-btn-b">Live Map</a>-->
 	</div>
-    <div>
+  <div data-role="footer">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="javascript:loadPlanner();">Planner</a></li>
+        <li><a href="javascript:refresh();">Near Me</a></li>
+      </ul>
     </div>
+  </div>
 </body>
 </html>
