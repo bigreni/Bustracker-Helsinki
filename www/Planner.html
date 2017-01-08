@@ -17,17 +17,15 @@
 <script type="text/javascript" src="js/index.js"></script>
 
 	<div id="fullpage" data-role="page">
-            <br>
-            <iframe style="width: 100vw; height:85vh; border: none" src="http://beta.digitransit.fi/" height="240" width="320"></iframe>
+            <div data-role="header">
+                <div data-role="navbar">
+                  <ul>
+                    <li><a href="javascript:loadMap();" data-role="button" class="ui-btn ui-btn-b" data-theme="b" data-iconpos="left">Live Map</a></li>
+                  </ul>
+                </div>
+            </div>
+            <iframe style="width: 100vw; height:90vh; border: none" src="http://beta.digitransit.fi/" height="240" width="320"></iframe>
             <!--<a href="javascript:loadMap();" class="ui-btn ui-btn-b">Live Map</a>-->
 	</div>
-  <div data-role="footer">
-    <div data-role="navbar">
-      <ul>
-        <li><a href="javascript:loadPlanner();">Planner</a></li>
-        <li><a href="javascript:refresh();">Near Me</a></li>
-      </ul>
-    </div>
-  </div>
 </body>
 </html>
