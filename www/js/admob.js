@@ -126,7 +126,7 @@ function errorFunction(error)
 }
 
     function loadInterstitial() {
-        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: true });
+        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: true, autoShow: true });
     }
 
 
