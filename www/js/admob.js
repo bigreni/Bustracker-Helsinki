@@ -76,7 +76,7 @@
         document.addEventListener('onAdPresent', function (data) { });
         document.addEventListener('onAdLeaveApp', function (data) { });
         document.addEventListener('onAdDismiss', function (data) 
-        { document.getElementById("live-page").style.display = "block"; 
+        { document.body.style.display = "block"; 
           document.getElementById("splashscreen").style.display = 'none';        
         });
     }
