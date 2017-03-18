@@ -77,9 +77,8 @@
         document.addEventListener('onAdLeaveApp', function (data) { });
         document.addEventListener('onAdDismiss', function (data) 
         { 
-        //document.body.style.display = "block"; 
-          document.getElementById("allbody").style.display = "block";        
-          //document.getElementById("splashscreen").style.display = 'none';        
+            document.body.style.display = "block"; 
+            document.getElementById("splashscreen").style.display = 'none';        
         });
     }
 
