@@ -45,6 +45,8 @@
 
         // new events, with variable to differentiate: adNetwork, adType, adEvent
         document.addEventListener('onAdFailLoad', function (data) {
+            document.body.style.display = "block"; 
+            document.getElementById("splashscreen").style.display = 'none';   
             //createSelectedBanner();
             //alert('error: ' + data.error +
             //        ', reason: ' + data.reason +
