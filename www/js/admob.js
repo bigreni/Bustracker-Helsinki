@@ -11,8 +11,6 @@
         admobid = { // for Android
             banner: 'ca-app-pub-1683858134373419/4648497083',
             interstitial: 'ca-app-pub-1683858134373419/3279071486'
-            //banner: 'ca-app-pub-3886850395157773/3411786244'
-            //interstitial: 'ca-app-pub-9249695405712287/3301233156'
         };
     }
 
@@ -20,11 +18,6 @@
         if (!AdMob) { alert('admob plugin not ready'); return; }
         initAd();
         loadInterstitial();
-        // display the banner at startup
-        //if (Math.round(Math.random()) == 1)
-        //{ loadInterstitial(); }
-        //else
-        //{ createSelectedBanner(); }
     }
 
     function initAd() {
@@ -49,19 +42,6 @@
     }
     // optional, in case respond to events or handle error
     function registerAdEvents() {
-        /* deprecated
-        document.addEventListener('onBannerFailedToReceive', function(data){ alert('error: ' + data.error + ', reason: ' + data.reason); });
-        document.addEventListener('onBannerReceive', function(){});
-        document.addEventListener('onBannerPresent', function(){});
-        document.addEventListener('onBannerLeaveApp', function(){});
-        document.addEventListener('onBannerDismiss', function(){});
-
-        document.addEventListener('onInterstitialFailedToReceive', function(data){ alert('error: ' + data.error + ', reason: ' + data.reason); });
-        document.addEventListener('onInterstitialReceive', function(){});
-        document.addEventListener('onInterstitialPresent', function(){});
-        document.addEventListener('onInterstitialLeaveApp', function(){});
-        document.addEventListener('onInterstitialDismiss', function(){});
-        */
 
         // new events, with variable to differentiate: adNetwork, adType, adEvent
         document.addEventListener('onAdFailLoad', function (data) {
@@ -136,25 +116,8 @@ function errorFunction(error)
 
    function checkFirstUse()
     {
-//        var currentVersion = 6;
-//        var p = window.localStorage.getItem("currentVersion");
-//        if (p == null) //App downloaded first time
-//        {
-////Finnish
-//            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for downloading', 'OK');
-//            window.localStorage.setItem("currentVersion", currentVersion);
-//        }
-//        else if(p < currentVersion) //if app upgraded
-//        {
-////Finnish
-//            navigator.notification.alert('To see the phone menu, please swipe up/down from the bottom/top of the screen.', initApp, 'Thank you for updating', 'OK');
-//            window.localStorage.setItem("currentVersion", currentVersion);            
-//        }
-//        else
-//        {
             askRating();
             initApp();
-//        }
     }
 
 function askRating()
