@@ -44,17 +44,16 @@
     function registerAdEvents() {
 
         // new events, with variable to differentiate: adNetwork, adType, adEvent
-        document.addEventListener('onAdFailLoad', function (data) 
-        {
-            document.body.removeAttribute('style'); 
-            document.getElementById('splashscreen').style.display = 'none';  
+        document.addEventListener('onAdFailLoad', function (data) {
+            document.getElementById('live-page').style.visibility = 'visible';
+            document.getElementById('splashscreen').style.display = 'none';
         });
         document.addEventListener('onAdLoaded', function (data) { });
         document.addEventListener('onAdPresent', function (data) { });
         document.addEventListener('onAdLeaveApp', function (data) { });
         document.addEventListener('onAdDismiss', function (data) 
         { 
-            document.body.removeAttribute('style'); 
+            document.getElementById('live-page').style.visibility = 'visible';
             document.getElementById('splashscreen').style.display = 'none';       
         });
     }
@@ -113,6 +112,8 @@ function errorFunction(error)
 
    function checkFirstUse()
     {
+            //document.getElementById('live-page').style.visibility = 'visible';
+            //document.getElementById('splashscreen').style.display = 'none';
             askRating();
             initApp();
     }
