@@ -46,6 +46,7 @@
         // new events, with variable to differentiate: adNetwork, adType, adEvent
         document.addEventListener('onAdFailLoad', function (data) {
             document.getElementById('map').style.visibility = 'visible';
+            document.getElementById('noteSpan').style.visibility = 'visible';
             document.getElementById('live-page').style.visibility = 'visible';
             document.getElementById('splashscreen').style.display = 'none';
         });
@@ -55,6 +56,7 @@
         document.addEventListener('onAdDismiss', function (data) 
         { 
             document.getElementById('map').style.visibility = 'visible';
+            document.getElementById('noteSpan').style.visibility = 'visible';
             document.getElementById('live-page').style.visibility = 'visible';
             document.getElementById('splashscreen').style.display = 'none';       
         });
