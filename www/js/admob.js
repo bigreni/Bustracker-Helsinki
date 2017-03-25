@@ -54,7 +54,7 @@
         document.addEventListener('onAdDismiss', function (data) 
         { 
             document.getElementById('fullpage').style.visibility = 'visible';
-            document.getElementById('splashscreen').style.display = 'none';       
+            document.getElementById('splashscreen').style.display = 'none';      
         });
     }
 
@@ -112,10 +112,10 @@ function errorFunction(error)
 
    function checkFirstUse()
     {
-            //document.getElementById('fullpage').style.visibility = 'visible';
-            //document.getElementById('splashscreen').style.display = 'none';
-            askRating();
-            initApp();
+            document.getElementById('fullpage').style.visibility = 'visible';
+            document.getElementById('splashscreen').style.display = 'none';
+            //askRating();
+            //initApp();
     }
 
 function askRating()
