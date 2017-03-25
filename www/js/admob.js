@@ -45,9 +45,7 @@
 
         // new events, with variable to differentiate: adNetwork, adType, adEvent
         document.addEventListener('onAdFailLoad', function (data) {
-            document.getElementById('map').style.visibility = 'visible';
-            document.getElementById('noteSpan').style.visibility = 'visible';
-            document.getElementById('live-page').style.visibility = 'visible';
+            document.getElementById('fullpage').style.visibility = 'visible';
             document.getElementById('splashscreen').style.display = 'none';
         });
         document.addEventListener('onAdLoaded', function (data) { });
@@ -55,9 +53,7 @@
         document.addEventListener('onAdLeaveApp', function (data) { });
         document.addEventListener('onAdDismiss', function (data) 
         { 
-            document.getElementById('map').style.visibility = 'visible';
-            document.getElementById('noteSpan').style.visibility = 'visible';
-            document.getElementById('live-page').style.visibility = 'visible';
+            document.getElementById('fullpage').style.visibility = 'visible';
             document.getElementById('splashscreen').style.display = 'none';       
         });
     }
@@ -110,13 +106,13 @@ function errorFunction(error)
 }
 
     function loadInterstitial() {
-        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: true });
+        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: true, autoShow: true });
     }
 
 
    function checkFirstUse()
     {
-            //document.getElementById('live-page').style.visibility = 'visible';
+            //document.getElementById('fullpage').style.visibility = 'visible';
             //document.getElementById('splashscreen').style.display = 'none';
             askRating();
             initApp();
