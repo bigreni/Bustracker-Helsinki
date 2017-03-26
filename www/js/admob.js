@@ -114,7 +114,7 @@ function errorFunction(error)
     {
             //document.getElementById('live-page').style.visibility = 'visible';
             //document.getElementById('splashscreen').style.display = 'none';
-            askRating();
+            //askRating();
             initApp();
     }
 
