@@ -112,7 +112,7 @@ function errorFunction(error)
 
    function checkFirstUse()
     {
-            //askRating();
+            askRating();
             initApp();
             //document.getElementById('fullpage').style.visibility = 'visible';
             //document.getElementById('screen').style.display = 'none';
