@@ -106,7 +106,7 @@ function errorFunction(error)
 }
 
     function loadInterstitial() {
-        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: true });
+        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: true, autoShow: true });
     }
 
 
@@ -114,8 +114,8 @@ function errorFunction(error)
     {
             //askRating();
             initApp();
-            document.getElementById('fullpage').style.visibility = 'visible';
-            document.getElementById('screen').style.display = 'none';
+            //document.getElementById('fullpage').style.visibility = 'visible';
+            //document.getElementById('screen').style.display = 'none';
     }
 
 function askRating()
