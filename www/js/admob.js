@@ -54,7 +54,7 @@
         document.addEventListener('onAdDismiss', function (data) 
         { 
             document.getElementById('fullpage').style.visibility = 'visible';
-            document.getElementById('splashscreen').style.display = 'none';      
+            document.getElementById('splashscreen').style.display = 'none';     
         });
     }
 
@@ -106,13 +106,13 @@ function errorFunction(error)
 }
 
     function loadInterstitial() {
-        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: true, autoShow: true });
+        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: true });
     }
 
 
    function checkFirstUse()
     {
-            //document.getElementById('fullpage').style.visibility = 'visible';
+            //document.getElementById('live-page').style.visibility = 'visible';
             //document.getElementById('splashscreen').style.display = 'none';
             askRating();
             initApp();
