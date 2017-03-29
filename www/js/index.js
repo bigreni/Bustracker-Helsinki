@@ -53,14 +53,27 @@ function refresh() {
     return false;
 };
 
-function loadPlanner()
+function showMap()
 {
-    window.location.href = "Planner.html";
-    return true;
-};
+    document.getElementById('divPlanner').style.display = 'none';
+    document.getElementById('divMap').style.display = 'block';
+    document.getElementById('divPlanner').style.height = '0vh';
+    document.getElementById('divMap').style.height = '90vh';
+    document.getElementById('listPlanner').style.display = 'none';
+    document.getElementById('listMap').style.display = 'block';
+}
 
-function loadMap()
+function showPlanner()
 {
-    window.location.href = "index.html";
-    return true;
+    if(document.getElementById('frmPlanner').src == '')
+    {
+        document.getElementById('frmPlanner').src = 'http://beta.digitransit.fi/';
+    }
+    document.getElementById('divPlanner').style.display = 'block';
+    document.getElementById('divMap').style.display = 'none';    
+    document.getElementById('divMap').style.height = '0vh';
+    document.getElementById('divPlanner').style.height = '90vh';
+    document.getElementById('listPlanner').style.display = 'block';
+    document.getElementById('listMap').style.display = 'none';
+
 }
