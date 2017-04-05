@@ -10,7 +10,7 @@
     if (/(android)/i.test(navigator.userAgent)) {
         admobid = { // for Android
             banner: 'ca-app-pub-1683858134373419/4648497083',
-            interstitial: 'ca-app-pub-1683858134373419/3279071486'
+            interstitial: 'ca-app-pub-9249695405712287/8898789158'
         };
     }
 
