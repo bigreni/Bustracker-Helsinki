@@ -49,12 +49,16 @@ var app = {
 };
 
 function refresh() {
-    window.top.location = window.top.location;
-    return false;
+    var iframe = document.getElementById('frmMap');
+    iframe.src = iframe.src;
 };
 
 function showMap()
 {
+    if(document.getElementById('frmMap').src == '')
+    {
+        document.getElementById('frmMap').src = 'Livemap.html';
+    }
     document.getElementById('divPlanner').style.display = 'none';
     document.getElementById('divMap').style.display = 'block';
     document.getElementById('divPlanner').style.height = '0vh';
@@ -65,10 +69,6 @@ function showMap()
 
 function showPlanner()
 {
-    if(document.getElementById('frmPlanner').src == '')
-    {
-        document.getElementById('frmPlanner').src = 'http://beta.digitransit.fi/';
-    }
     document.getElementById('divPlanner').style.display = 'block';
     document.getElementById('divMap').style.display = 'none';    
     document.getElementById('divMap').style.height = '0vh';

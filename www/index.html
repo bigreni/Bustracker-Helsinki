@@ -41,27 +41,27 @@
                 onLoad();
                 //document.getElementById("screen").style.display = 'none';
             };
-            document.getElementById("screen").innerHTML = 'Loading the map. This may take a few seconds...';
+            document.getElementById("screen").innerHTML = 'Loading the app. This may take a few seconds...';
             document.getElementById("screen").style.display = 'block';
         </script>        
 	    <div id="fullpage" data-role="page" style="visibility: hidden;">
               <div data-role="header">
                 <div data-role="navbar">
-                  <ul id="listMap">
+                  <ul id="listMap" style="display: none;">
                     <li><a href="javascript:showPlanner();" data-role="button" class="ui-btn ui-btn-b" data-theme="b" data-iconpos="left">Planner</a></li>
                     <li><a href="javascript:refresh();" data-role="button" class="ui-btn ui-btn-b" data-theme="b" data-iconpos="left">Near Me</a></li>
                   </ul>
-                  <ul id="listPlanner" style="display: none;">
+                  <ul id="listPlanner">
                     <li><a href="javascript:showMap();" data-role="button" class="ui-btn ui-btn-b" data-theme="b" data-iconpos="left">Live Map</a></li>
                   </ul>
                 </div>
             </div>
-        <div id="divMap" style="height: 90vh;">
-           <iframe style="width: 100vw; height:90vh; border: none" src="Livemap.html" height="240" width="320"></iframe>
-         </div>
-        <div id="divPlanner" style="display: none;">
-            <iframe id="frmPlanner" style="width: 100vw; height:90vh; border: none" height="240" width="320"></iframe>
-        </div>
+            <div id="divMap" style="display: none;">
+               <iframe id="frmMap" style="width: 100vw; height:90vh; border: none" height="240" width="320"></iframe>
+            </div>
+            <div id="divPlanner" style="height: 90vh">
+                <iframe id="frmPlanner" style="width: 100vw; height:90vh; border: none" src="http://beta.digitransit.fi/" height="240" width="320"></iframe>
+            </div>
         </div>
 
 </body>
