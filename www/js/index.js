@@ -51,29 +51,45 @@ var app = {
 function refresh() {
     var iframe = document.getElementById('frmMap');
     iframe.src = iframe.src;
+    closeme();
 };
 
 function showMap()
 {
-    if(document.getElementById('frmMap').src == '')
-    {
-        document.getElementById('frmMap').src = 'Livemap.html';
-    }
     document.getElementById('divPlanner').style.display = 'none';
     document.getElementById('divMap').style.display = 'block';
     document.getElementById('divPlanner').style.height = '0vh';
     document.getElementById('divMap').style.height = '90vh';
-    document.getElementById('listPlanner').style.display = 'none';
-    document.getElementById('listMap').style.display = 'block';
+    closeme();
+//    document.getElementById('listPlanner').style.display = 'none';
+//    document.getElementById('listMap').style.display = 'block';
 }
 
 function showPlanner()
 {
+        if(document.getElementById('frmPlanner').src == '')
+    {
+        document.getElementById('frmPlanner').src = 'http://beta.digitransit.fi/';
+    }
+
     document.getElementById('divPlanner').style.display = 'block';
     document.getElementById('divMap').style.display = 'none';    
     document.getElementById('divMap').style.height = '0vh';
     document.getElementById('divPlanner').style.height = '90vh';
-    document.getElementById('listPlanner').style.display = 'block';
-    document.getElementById('listMap').style.display = 'none';
+    closeme();
+//    document.getElementById('listPlanner').style.display = 'block';
+//    document.getElementById('listMap').style.display = 'none';
 
 }
+
+    function closeme() {
+    var pagebody = $("#pagebody");
+    var topbar = $("#toolbarnav");
+            document.getElementById('navmenu').style.display = 'none';
+            topbar.animate({
+                left: "0px"
+            }, { duration: 180, queue: false });
+            pagebody.animate({
+                left: "0px"
+            }, { duration: 180, queue: false });
+    }
