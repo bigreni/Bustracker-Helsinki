@@ -35,7 +35,7 @@ div#fullpage {
 	padding: 0;
 }
 
-/*a:link {
+a:link {
     color: #000;
     text-decoration: none;
 }
@@ -53,7 +53,7 @@ a:hover {
 a:active {
     color: #000;
     text-decoration: none;
-}*/
+}
 
 div.cabeza
 {
@@ -79,6 +79,10 @@ th {
 .table-arrivals thead th {
     padding: 0.45rem 0.9rem;
     text-transform: uppercase;
+}
+
+h3{
+    margin: 0px;
 }
 
 p.title{

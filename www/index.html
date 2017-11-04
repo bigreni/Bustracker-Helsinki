@@ -4,11 +4,10 @@
 <meta charset="utf-8" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-	<link type="text/css" rel="stylesheet" media="all" href="css/style.css">
-	<link type="text/css" rel="stylesheet" media="all" href="css/responsive.css">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/jquery.sidr.dark.min.css">
+    <script src="js/jquery.sidr.min.js"></script>
         <style>
             /* Hide all the app pages until jQuery Mobile inits to
                avoid the Flash of Unstyled Content */
@@ -40,50 +39,24 @@
                 onLoad();
                 //document.getElementById("screen").style.display = 'none';
             };
-            document.getElementById("screen").innerHTML = 'Loading the app. This may take a few seconds...';
+            document.getElementById("screen").innerHTML = 'Loading the app. Thank you for your patience.';
             document.getElementById("screen").style.display = 'block';
         </script>        
-    	<div id="w">
-		    <div id="pagebody" style="padding-top: 40px; visibility: hidden;">
-			    <header id="toolbarnav">
-				    <a href="#navmenu" id="menu-btn"></a>
-			    </header>
-                <div id="divMap" style="height: 90vh;">
-                   <iframe id="frmMap" style="width: 100vw; height:90vh; border: none" height="240" width="320" src="Livemap.html"></iframe>
-                </div>
-                <div id="divPlanner"  style="display: none;">
-                    <iframe id="frmPlanner" style="width: 100vw; height:90vh; border: none" height="240" width="320"></iframe>
-                </div>
-		    </div>
-		
-		    <div id="navmenu" style="display: none;">
-				    <ul>
-					    <li><a href="javascript:showPlanner();">Journey Planner</a></li>
-					    <li><a href="javascript:showMap();">Live Map</a></li>
-					    <li><a href="javascript:refresh();">Near Me</a></li>
-				    </ul>
-		    </div>
-	</div>
-
-	    <!--<div id="fullpage" data-role="page" style="visibility: hidden;">
-              <div data-role="header">
-                <div data-role="navbar">
-                  <ul id="listMap" style="display: none;">
-                    <li><a href="javascript:showPlanner();" data-role="button" class="ui-btn ui-btn-b" data-theme="b" data-iconpos="left">Planner</a></li>
-                    <li><a href="javascript:refresh();" data-role="button" class="ui-btn ui-btn-b" data-theme="b" data-iconpos="left">Near Me</a></li>
-                  </ul>
-                  <ul id="listPlanner">
-                    <li><a href="javascript:showMap();" data-role="button" class="ui-btn ui-btn-b" data-theme="b" data-iconpos="left">Live Map</a></li>
-                  </ul>
-                </div>
+	    <div id="fullpage" data-role="page">
+            <h3><a id="simplemenu" href="#sidr" style="font-size: xx-large; background-color: #007ac9; padding: 5px">&#9776;</a>HSL</h3>
+            <div id="sidr">
+              <ul>
+                <li><a href="javascript:showPlanner();" >Planner / Reittiopas</a></li>
+                <li><a href="javascript:showMap();" >Live Map</a></li>
+              </ul>
             </div>
             <div id="divMap" style="display: none;">
-               <iframe id="frmMap" style="width: 100vw; height:90vh; border: none" height="240" width="320"></iframe>
+               <iframe id="frmMap" style="width: 100vw; height:92vh; border: none" height="240" width="320"></iframe>
             </div>
-            <div id="divPlanner" style="height: 90vh">
-                <iframe id="frmPlanner" style="width: 100vw; height:90vh; border: none" src="http://beta.digitransit.fi/" height="240" width="320"></iframe>
+            <div id="divPlanner" style="height: 92vh">
+                <iframe id="frmPlanner" style="width: 100vw; height:92vh; border: none" src="http://beta.digitransit.fi/" height="240" width="320"></iframe>
             </div>
-        </div>-->
+        </div>
 
 </body>
 </html>

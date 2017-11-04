@@ -44,14 +44,12 @@
         };
         AdMob.setOptions(defaultOptions);
         registerAdEvents();
-       // AndroidFullScreen.immersiveMode(successFunction, errorFunction);
     }
     // optional, in case respond to events or handle error
     function registerAdEvents() {
 
         // new events, with variable to differentiate: adNetwork, adType, adEvent
         document.addEventListener('onAdFailLoad', function (data) {
-            document.getElementById('pagebody').style.visibility = 'visible';
             document.getElementById('screen').style.display = 'none';
         });
         document.addEventListener('onAdLoaded', function (data) { });
@@ -59,7 +57,6 @@
         document.addEventListener('onAdLeaveApp', function (data) { });
         document.addEventListener('onAdDismiss', function (data) 
         { 
-            document.getElementById('pagebody').style.visibility = 'visible';
             document.getElementById('screen').style.display = 'none';     
         });
     }
@@ -68,14 +65,6 @@
         AdMob.createBanner({adId:admobid.banner});
     }
 
-function successFunction()
-{
-}
- 
-function errorFunction(error)
-{
-}
-
     function loadInterstitial() {
         AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: true });
     }
@@ -83,10 +72,10 @@ function errorFunction(error)
 
    function checkFirstUse()
     {
-            //askRating();
-            //initApp();
-            document.getElementById('pagebody').style.visibility = 'visible';
-            document.getElementById('screen').style.display = 'none';
+            askRating();
+            initApp();
+            $('#simplemenu').sidr();
+            //document.getElementById('screen').style.display = 'none';
     }
 
 function askRating()
