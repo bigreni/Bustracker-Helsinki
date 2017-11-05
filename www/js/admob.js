@@ -75,9 +75,9 @@
 
    function checkFirstUse()
     {
-            askRating();
             initApp();
             $('#simplemenu').sidr();
+            askRating();
             //document.getElementById('screen').style.display = 'none';
     }
 
