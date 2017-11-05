@@ -21,7 +21,10 @@
     }
 
     function initApp() {
-        if (!AdMob) { alert('admob plugin not ready'); return; }
+        if (!AdMob) {             
+        document.getElementById('screen').style.display = 'none';     
+        return; 
+        }
         initAd();
         loadInterstitial();
     }
@@ -57,7 +60,7 @@
         document.addEventListener('onAdLeaveApp', function (data) { });
         document.addEventListener('onAdDismiss', function (data) 
         { 
-            document.getElementById('screen').style.display = 'none';     
+            document.getElementById('screen').style.display = 'none';
         });
     }
 
