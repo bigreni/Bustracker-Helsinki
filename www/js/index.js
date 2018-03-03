@@ -59,6 +59,7 @@ function showMap()
     if(document.getElementById('frmMap').src == '')
     {
         document.getElementById('frmMap').src = 'Livemap.html';
+        document.getElementById('frmMap').setAttribute('allow', 'geolocation *;');
     }
     document.getElementById('divPlanner').style.display = 'none';
     document.getElementById('divMap').style.display = 'block';
