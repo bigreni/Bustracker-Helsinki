@@ -1,4 +1,417 @@
 (function() {
+  var CityNavigator, console, method, methods, _fn, _i, _len;
+
+  if (!window.console) {
+    console = {};
+    window.console = console;
+    methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'];
+    _fn = function(method) {
+      return console[method] = function() {};
+    };
+    for (_i = 0, _len = methods.length; _i < _len; _i++) {
+      method = methods[_i];
+      _fn(method);
+    }
+  }
+
+  $(document).bind("mobileinit", function() {
+    window.console.log("mobileinit");
+    $.mobile.defaultPageTransition = "slide";
+    $.mobile.defaultHomeScroll = 0;
+    window.citynavi.reach = typeof reach !== "undefined" && reach !== null ? reach.Api.init() : void 0;
+    return $.mobile.page.prototype.options.keepNative = "form input";
+  });
+
+  $(document).ajaxStart(function(e) {
+    return $.mobile.loading('show');
+  });
+
+  $(document).ajaxStop(function(e) {
+    return $.mobile.loading('hide');
+  });
+
+  CityNavigator = (function() {
+    function CityNavigator(opts) {
+      this.source_location = null;
+      this.simulation_time = null;
+      this.itinerary = null;
+      _.extend(this, opts);
+    }
+
+    CityNavigator.prototype.get_source_location = function() {
+      return this.source_location;
+    };
+
+    CityNavigator.prototype.get_source_location_or_area_center = function() {
+      return this.source_location || this.config.center;
+    };
+
+    CityNavigator.prototype.set_source_location = function(loc) {
+      return this.source_location = loc;
+    };
+
+    CityNavigator.prototype.set_simulation_time = function(time) {
+      return this.simulation_time = time;
+    };
+
+    CityNavigator.prototype.time = function() {
+      return this.simulation_time || moment();
+    };
+
+    CityNavigator.prototype.get_itinerary = function() {
+      return this.itinerary;
+    };
+
+    CityNavigator.prototype.set_itinerary = function(itinerary) {
+      return this.itinerary = itinerary;
+    };
+
+    return CityNavigator;
+
+  })();
+
+  window.citynavi = new CityNavigator();
+
+}).call(this);
+
+//# sourceMappingURL=init.js.map
+(function() {
+  var defaults, hel_geocoder_base_url, hel_servicemap_base_url, helsinki, hsl_colors, manchester, nl, tampere;
+
+  citynavi.update_configs = function(configs) {
+    var config, key, _ref;
+    citynavi.configs || (citynavi.configs = {});
+    for (key in configs) {
+      config = configs[key];
+      citynavi.configs[key] = _.extend(citynavi.configs[key] || {}, config);
+    }
+    if ((_ref = citynavi.config) != null ? _ref.id : void 0) {
+      return citynavi.set_config(citynavi.config.id);
+    }
+  };
+
+  citynavi.set_config = function(id) {
+    citynavi.config = _.extend({}, citynavi.configs.defaults, citynavi.configs[id], citynavi.configs.overrides || {});
+    return citynavi.config.id = id;
+  };
+
+  hsl_colors = {
+    walk: '#9ab9c9',
+    wait: '#999999',
+    1: '#007ac9',
+    2: '#00985f',
+    3: '#007ac9',
+    4: '#007ac9',
+    5: '#007ac9',
+    6: '#ff6319',
+    7: '#00b9e4',
+    8: '#007ac9',
+    12: '#8c4799',
+    21: '#007ac9',
+    22: '#007ac9',
+    23: '#007ac9',
+    24: '#007ac9',
+    25: '#007ac9',
+    36: '#007ac9',
+    38: '#007ac9',
+    39: '#007ac9'
+  };
+
+  hel_geocoder_base_url = "http://dev.hel.fi/geocoder/v1/";
+
+  hel_servicemap_base_url = "http://www.hel.fi/palvelukarttaws/rest/v2/";
+
+  defaults = {
+    hel_geocoder_address_url: hel_geocoder_base_url + "address/",
+    hel_geocoder_poi_url: hel_geocoder_base_url + "poi/",
+    waag_url: "http://api.citysdk.waag.org/",
+    google_url: "http://dev.hel.fi/geocoder/google/",
+    nominatim_url: "http://open.mapquestapi.com/nominatim/v1/search.php",
+    bag42_url: "http://bag42.nl/api/v0/geocode/json",
+    hel_servicemap_service_url: hel_servicemap_base_url + "service/",
+    hel_servicemap_unit_url: hel_servicemap_base_url + "unit/",
+    reittiopas_url: "http://tuukka.kapsi.fi/tmp/reittiopas.cgi?callback=?",
+    osm_notes_url: "http://api.openstreetmap.org/api/0.6/notes.json",
+    faye_url: "https://dev.hsl.fi/faye",
+    icon_base_path: "static/images/",
+    min_zoom: 10,
+    colors: {
+      hsl: hsl_colors,
+      google: {
+        WALK: hsl_colors.walk,
+        CAR: hsl_colors.walk,
+        BICYCLE: hsl_colors.walk,
+        WAIT: hsl_colors.wait,
+        0: hsl_colors[2],
+        1: hsl_colors[6],
+        2: hsl_colors[12],
+        3: hsl_colors[5],
+        4: hsl_colors[7],
+        109: hsl_colors[12]
+      }
+    },
+    icons: {
+      google: {
+        WALK: 'walking.svg',
+        CAR: 'car.svg',
+        BICYCLE: 'bicycle.svg',
+        WAIT: 'clock.svg',
+        0: 'tram_stop.svg',
+        1: 'subway.svg',
+        2: 'train_station2.svg',
+        3: 'bus_stop.svg',
+        4: 'port.svg',
+        109: 'train_station2.svg'
+      }
+    },
+    defaultmap: "hsl",
+    maps: {
+      hsl: {
+        name: "HSL",
+        url_template: 'https://api.digitransit.fi/map/v1/hsl-map-256/{z}/{x}/{y}.png',
+        opts: {
+          maxZoom: 19,
+          attribution: 'Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>'
+        }
+      },
+      osm: {
+        name: "OpenStreetMap",
+        url_template: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        opts: {
+          maxZoom: 19,
+          attribution: 'Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>'
+        }
+      },
+      opencyclemap: {
+        name: "OpenCycleMap",
+        url_template: 'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png',
+        opts: {
+          attribution: 'Map &copy; <a href="http://www.thunderforest.com/" target="_blank">Thunderforest</a>, Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>'
+        }
+      },
+      transport: {
+        name: "Public transport",
+        url_template: 'http://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png',
+        opts: {
+          attribution: 'Map &copy; <a href="http://www.thunderforest.com/" target="_blank">Thunderforest</a>, Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>'
+        }
+      },
+      mapquest: {
+        name: "MapQuest",
+        url_template: 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',
+        opts: {
+          maxZoom: 19,
+          subdomains: '1234',
+          attribution: 'Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a>, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">'
+        }
+      }
+    }
+  };
+
+  tampere = {
+    name: "Tampere",
+    country: "fi",
+    cities: ["Tampere", "Tammerfors"],
+    google_autocomplete_append: "Tampere",
+    bbox_ne: [61.8237444, 24.1064742],
+    bbox_sw: [61.42863, 23.5611791],
+    center: [61.4976348, 23.7688124],
+    otp_base_url: "http://dev.hsl.fi/tampere/opentripplanner-api-webapp/ws/",
+    siri_url: "http://dev.hsl.fi/siriaccess/vm/json?operatorRef=TKL",
+    poi_muni_id: null,
+    waag_id: "admr.fi.tampere",
+    poi_providers: {
+      "waag": [
+        {
+          type: "library"
+        }, {
+          type: "park"
+        }, {
+          type: "swimming_pool"
+        }, {
+          type: "restaurant"
+        }, {
+          type: "cafe"
+        }, {
+          type: "bar"
+        }, {
+          type: "pub"
+        }, {
+          type: "supermarket"
+        }, {
+          type: "pharmacy"
+        }, {
+          type: "toilet"
+        }, {
+          type: "recycling"
+        }
+      ]
+    },
+    autocompletion_providers: ["poi_categories", "history", "osm", "google"]
+  };
+
+  manchester = {
+    name: "Greater Manchester",
+    country: "gb",
+    cities: ["Bolton", "Bury", "Oldham", "Rochdale", "Stockport", "Tameside", "Trafford", "Wigan", "Manchester", "Salford"],
+    google_autocomplete_append: "Manchester",
+    bbox_ne: [53.685760, -1.909630],
+    bbox_sw: [53.327332, -2.730550],
+    center: [53.479167, -2.244167],
+    otp_base_url: "http://dev.hsl.fi/manchester/opentripplanner-api-webapp/ws/",
+    siri_url: "http://dev.hsl.fi/siriaccess/vm/json?operatorRef=GMN",
+    poi_muni_id: 44001,
+    waag_id: "admr.uk.gr.manchester",
+    poi_providers: {
+      "waag": [
+        {
+          type: "restaurant"
+        }, {
+          type: "cafe"
+        }, {
+          type: "bar"
+        }, {
+          type: "pub"
+        }, {
+          type: "supermarket"
+        }, {
+          type: "swimming_pool"
+        }, {
+          type: "pharmacy"
+        }
+      ],
+      "geocoder": [
+        {
+          type: "park"
+        }, {
+          type: "library"
+        }, {
+          type: "recycling"
+        }, {
+          type: "toilet"
+        }
+      ]
+    },
+    autocompletion_providers: ["poi_categories", "history", "osm", "google"]
+  };
+
+  helsinki = {
+    name: "Helsinki Region",
+    country: "fi",
+    cities: ["Helsinki", "Vantaa", "Espoo", "Kauniainen", "Kerava", "Sipoo", "Kirkkonummi", "Helsingfors", "Vanda", "Esbo", "Grankulla", "Kervo", "Sibbo", "Kyrkslätt"],
+    bbox_ne: [60.653728, 25.576590],
+    bbox_sw: [59.903339, 23.692820],
+    center: [60.170833, 24.9375],
+    otp_base_url: "https://dev.hsl.fi/opentripplanner-api-webapp/ws/",
+    siri_url: "https://dev.hsl.fi/siriaccess/vm/json?operatorRef=HSL",
+    poi_muni_id: null,
+    waag_id: "admr.fi.uusimaa",
+    poi_providers: {
+      "waag": [
+        {
+          type: "restaurant"
+        }, {
+          type: "cafe"
+        }, {
+          type: "bar"
+        }, {
+          type: "pub"
+        }, {
+          type: "supermarket"
+        }, {
+          type: "pharmacy"
+        }
+      ],
+      "geocoder": [
+        {
+          type: "park"
+        }, {
+          type: "library"
+        }, {
+          type: "recycling"
+        }, {
+          type: "swimming_pool"
+        }, {
+          type: "toilet"
+        }
+      ]
+    },
+    autocompletion_providers: ["poi_categories", "history", "geocoder", "osm"]
+  };
+
+  nl = {
+    name: "Netherlands",
+    country: "nl",
+    cities: null,
+    google_autocomplete_append: "Netherlands",
+    google_suffix: ", The Netherlands",
+    bbox_ne: [53.617498100000006, 13.43461],
+    bbox_sw: [43.554167, 2.35503],
+    center: [52.37832, 4.89973],
+    min_zoom: 8,
+    otp_base_url: "http://144.76.26.165/amsterdam/otp-rest-servlet/ws/",
+    poi_muni_id: null,
+    waag_id: "admr.nl.nederland",
+    poi_providers: {
+      "waag": [
+        {
+          type: "library"
+        }, {
+          type: "park"
+        }, {
+          type: "swimming_pool"
+        }, {
+          type: "restaurant"
+        }, {
+          type: "cafe"
+        }, {
+          type: "bar"
+        }, {
+          type: "pub"
+        }, {
+          type: "supermarket"
+        }, {
+          type: "toilet"
+        }, {
+          type: "recycling"
+        }
+      ]
+    },
+    autocompletion_providers: ["poi_categories", "osm", "bag42", "google"]
+  };
+
+  citynavi.update_configs({
+    defaults: defaults,
+    helsinki: helsinki,
+    manchester: manchester,
+    tampere: tampere,
+    nl: nl
+  });
+
+  citynavi.set_config("manchester");
+
+}).call(this);
+
+//# sourceMappingURL=config.js.map
+(function() {
+  citynavi.update_configs({
+    defaults: {
+      new_feature_api_url: "http://example.com/"
+    },
+    helsinki: {
+      cities: citynavi.configs.helsinki.cities.concat(["Inarinjärvi"])
+    },
+    llanfairpwll: {
+      country: "gb"
+    }
+  });
+
+  citynavi.set_config("helsinki");
+
+}).call(this);
+
+//# sourceMappingURL=local_config.js.map
+(function() {
   var BackControl, DetailsControl, TRANSFORM_MAP, commentMarker, construct_locationfound_event, contextmenu, control_layers, create_tile_layer, create_wait_leg, currentStep, currentStepIndex, decode_polyline, dir_to_finnish, display_detail, display_route_result, display_step, find_route, find_route_offline, find_route_otp, find_route_reittiopas, format_code, format_time, google_colors, google_icons, handle_vehicle_update, hel_servicemap_unit_url, interpolations, interpret_jore, key, lastLeg, layers, location_to_finnish, map, map_under_drag, mapfitBounds, marker_changed, mqtt_to_live, offline_cleanup, onSourceDragEnd, onTargetDragEnd, osm_notes_url, osmnotes, otp_cleanup, path_to_finnish, poi_markers, positionMarker, positionMarker2, position_bounds, position_point, previous_positions, reittiopas_url, render_route_buttons, render_route_layer, reset_map, resize_map, routeLayer, route_to_destination, route_to_service, set_comment_marker, set_source_marker, set_target_marker, simulation_step, simulation_timeoutId, simulation_timestep, simulation_timestep_default, siri_to_live, sourceCircle, sourceMarker, speak, speak_callback, speak_queue, speak_real, step_to_finnish_speech, targetMarker, transform_location, transport_colors, value, vehicles, _ref, _ref1, _ref2,
     __slice = [].slice;
 
@@ -191,7 +604,7 @@
     map.setView(citynavi.config.center, citynavi.config.min_zoom);
     console.log("live map - subscribing to all vehicles");
     routeLayer = L.featureGroup().addTo(map);
-    return $.getJSON("mqtt.hsl.fi/hfp/v1/journey/ongoing/", function(data) {
+    return $.getJSON("https://digitransit.fi/vehicle/journey/", function(data) {
       var body, count, error, mqtt, sub, topic, _ref;
       count = 0;
       for (topic in data) {
@@ -1749,3 +2162,42 @@
 }).call(this);
 
 //# sourceMappingURL=routing.js.map
+(function() {
+  var Realtime;
+
+  Realtime = (function() {
+    function Realtime() {
+      this.client = new Faye.Client(citynavi.config.faye_url);
+      this.subs = {};
+    }
+
+    Realtime.prototype.subscribe_route = function(route_id, callback, callback_args) {
+      var path, route_path, sub;
+      if (this.subs[route_id]) {
+        this.unsubscribe_route(route_id);
+      }
+      route_path = route_id.replace(/\ /g, "_").replace(/:/g, "-");
+      path = "/location/" + citynavi.config.id + "/" + route_path + "/**";
+      sub = this.client.subscribe(path, function(message) {
+        return callback(message, callback_args);
+      });
+      return this.subs[route_id] = sub;
+    };
+
+    Realtime.prototype.unsubscribe_route = function(route_id) {
+      if (!this.subs[route_id]) {
+        return;
+      }
+      this.subs[route_id].cancel();
+      return delete this.subs[route_id];
+    };
+
+    return Realtime;
+
+  })();
+
+  citynavi.realtime = new Realtime;
+
+}).call(this);
+
+//# sourceMappingURL=realtime.js.map
