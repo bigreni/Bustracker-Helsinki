@@ -55,7 +55,9 @@
         document.addEventListener('onAdFailLoad', function (data) {
             document.getElementById('screen').style.display = 'none';
         });
-        document.addEventListener('onAdLoaded', function (data) { });
+        document.addEventListener('onAdLoaded', function (data) {
+            AdMob.showInterstitial();
+        });
         document.addEventListener('onAdPresent', function (data) { });
         document.addEventListener('onAdLeaveApp', function (data) { });
         document.addEventListener('onAdDismiss', function (data) 
@@ -69,7 +71,7 @@
     }
 
     function loadInterstitial() {
-        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: true });
+        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: true, autoShow: false });
     }
 
 
