@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget 
 id="com.helsinki.withads" 
-version="1.0.0"
+version="1.0.1"
 versionCode = "15" 
 xmlns="http://www.w3.org/ns/widgets"
 xmlns:gap="http://phonegap.com/ns/1.0"
@@ -16,6 +16,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     </author>
     <content src="index.html" />
     <preference name="android-build-tool" value="gradle" /> 
+    <preference name="phonegap-version" value="cli-9.0.0" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
@@ -29,12 +30,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <preference name="SplashScreenDelay" value="0"/>
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
-    <preference name="android-minSdkVersion" value="14" />
-    <preference name="android-targetSdkVersion" value="26" />
+    <preference name="android-minSdkVersion" value="21" />
+    <preference name="android-targetSdkVersion" value="28" />
     <preference name="android-installLocation" value="auto" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="DisallowOverscroll" value ="true" />
-    <gap:plugin name="cordova-plugin-admobpro" source="npm" />
+    <gap:plugin name="cordova-plugin-admobpro" source="npm" >
+        <variable name="ADMOB_APP_ID" value="pub-9249695405712287"></variable>
+    </gap:plugin>
     <gap:plugin name="cordova-plugin-statusbar" source="npm"/>
     <gap:plugin name="cordova-plugin-device" source="npm" />
     <gap:plugin name="cordova-plugin-device-motion" source="npm"/>
@@ -42,12 +45,18 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
     <gap:plugin name="cordova-plugin-dialogs" source="npm"/>
     <gap:plugin name="cordova-plugin-apprate" source="npm"/>
-    <gap:plugin name="cordova-plugin-google-analytics" source="npm" spec="1.8.4"/>
+    <!--<gap:plugin name="cordova-plugin-google-analytics" source="npm" spec="1.8.4"/>-->
     <gap:plugin name="cordova.plugins.diagnostic" source="npm" />
-    <gap:config-file platform="android" parent="/manifest" mode="add">
+    <!--<gap:config-file platform="android" parent="/manifest" mode="add">
         <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
         <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    </gap:config-file>
+    </gap:config-file>-->
+    <platform name="android">
+    <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest">
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    </edit-config>
+    </platform>    
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
     <allow-navigation href="data:*" />

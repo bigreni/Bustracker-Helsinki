@@ -76,18 +76,16 @@
    function checkFirstUse()
     {
         checkPermissions();
-        window.ga.startTrackerWithId('UA-88579601-12', 1, function(msg) {
-            window.ga.trackView('Home');
-        });
+        //window.ga.startTrackerWithId('UA-88579601-12', 1, function(msg) {
+        //    window.ga.trackView('Home');
+        //});
         initApp();
-        $('#simplemenu').sidr();
         askRating();
         //document.getElementById('screen').style.display = 'none';
     }
 
    function notFirstUse()
     {
-        $('#simplemenu').sidr();
         //askRating();
         document.getElementById('screen').style.display = 'none';
     }
