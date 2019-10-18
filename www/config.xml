@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget 
 id="com.helsinki.withads" 
-version="1.0.2"
+version="1.2"
 versionCode = "15" 
 xmlns="http://www.w3.org/ns/widgets"
 xmlns:gap="http://phonegap.com/ns/1.0"
@@ -43,6 +43,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <gap:plugin name="cordova-plugin-device-motion" source="npm"/>
     <gap:plugin name="cordova-plugin-geolocation" source="npm"/>
     <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
+    <gap:plugin name="cordova-plugin-dialogs" source="npm"/>
     <gap:plugin name="cordova-plugin-apprate" source="npm"/>
     <!--<gap:plugin name="cordova-plugin-google-analytics" source="npm" spec="1.8.4"/>-->
     <gap:plugin name="cordova.plugins.diagnostic" source="npm" />
