@@ -71,7 +71,7 @@
     }
 
     function loadInterstitial() {
-        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: true, autoShow: false });
+        AdMob.prepareInterstitial({ adId: admobid.interstitial, isTesting: false, autoShow: false });
     }
 
 
